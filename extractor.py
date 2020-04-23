@@ -90,12 +90,12 @@ def writeCSV(dataSet,nomeArquivo):
         
 
     f=open(nomeArquivo,'w')
-    line = "A;A#;B;C;C#;D;D#;E;F;F#;G;G#;A;A#;B;C;C#;D;D#;E;F;F#;G;G#;A;A#;B;C;C#;D;D#;E;F;F#;G;G#;A;A#;B;C;C#;D;D#;E;F;F#;G;G#;baseNote;variation1;variation2"
+    line = "A;Asus;B;C;Csus;D;Dsus;E;F;Fsus;G;Gsus;A;Asus;B;C;Csus;D;Dsus;E;F;Fsus;G;Gsus;A;Asus;B;C;Csus;D;Dsus;E;F;Fsus;G;Gsus;A;Asus;B;C;Csus;D;Dsus;E;F;Fsus;G;Gsus;baseNote;variation1;variation2"
     f.write(line+'\n')
     for frequency in frequenciesT:
         line = ""
         for n in frequency:
-            line += n.replace(".",",") + ";"
+            line += n + ";"
         f.write(line+'\n')
     f.close()
 
