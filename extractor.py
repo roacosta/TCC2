@@ -20,6 +20,7 @@ def extractFeatures(wavs) -> list:
     labels = []
     lastSignal = 0
     dataSet = []
+    from sklearn.preprocessing import MinMaxScaler
 
     for wav in wavs:
 
@@ -73,12 +74,14 @@ def extractFeatures(wavs) -> list:
                     #print("valores[0,",j,"] = ",valores[0,j],"freqsNew[",j,"0] = ",freqsNew[j,0])
                     if (valores[0,k] > freqsNew[j,0]):
                         break
-                    if (valores[0,k] <= freqsNew[j,0]) & (valores[0,k] >= freqsNew[j-1,0]) :
+                    if (valores[0,k] <= freqsNew[j,0]) & (valores[0,k] >= freqsNew[j-1,0]):
                         if (freqsNew[j,1] < valores[1,j]):
                             freqsNew[j,1] = valores[1,j]
-
+                            
             dataSet.append([freqsNew,label])            
     return dataSet
+
+
 
 
 def writeCSV(dataSet,nomeArquivo):
@@ -104,6 +107,10 @@ directories = [os.path.join("records", name) for name in os.listdir("records")]
 wavs = []
 browseFiles(directories,wavs)
 dataSet = extractFeatures(wavs)
+
+
+
+
 writeCSV(dataSet,'data.csv')
 
 
