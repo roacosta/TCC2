@@ -1,6 +1,6 @@
 import numpy as np 
 #Carrega os dados
-chords = np.genfromtxt('data.csv',delimiter=';',dtype='str',invalid_raise = False,usecols=np.arange(0,51))
+chords = np.genfromtxt('datatest.csv',delimiter=';',dtype='str',invalid_raise = False,usecols=np.arange(0,51))
 
 #>>> from sklearn import preprocessing
 #>>> le = preprocessing.LabelEncoder()
@@ -18,6 +18,14 @@ le = preprocessing.LabelEncoder()
 le.fit(chords[:,chords.shape[1]-3])
 chords[1:,chords.shape[1]-3] = le.transform(chords[1:,chords.shape[1]-3])
 chords = shuffle(chords[1:,2:-2].astype(float))
+
+#import seaborn as sns
+#corr = wines.corr()
+#sns.heatmap(corr, 
+#            xticklabels=corr.columns.values,
+#            yticklabels=corr.columns.values)
+#sns.plt.show()
+
 #A A B C C D D E F F G G
 #0 1 2 3 4 5 6 7 8 9 1011 
 '''chords[:,0] += chords[:,12] + chords[:,24] + chords[:,36]
@@ -37,8 +45,8 @@ chords[:,11] += chords[:,23] + chords[:,35]
 
 
 labelbase =         chords[:,chords.shape[1]-1]
-#labelVariation1 =   chords[:,chords.shape[1]-2]
-#labelVariation2 =   chords[:,chords.shape[1]-1]
+labelVariation1 =   chords[:,chords.shape[1]-2]
+labelVariation2 =   chords[:,chords.shape[1]-1]
 
 nsize = int(chords.shape[0]*.7)
 Xtr = chords[:nsize,:]
@@ -51,7 +59,6 @@ from sklearn.preprocessing import MinMaxScaler
 from sklearn import preprocessing
 
 scaler = MinMaxScaler(feature_range = (-3,1.5))
-Xtr
 scaler.fit(Xtr)
 Xtr = scaler.transform(Xtr)
 Xte = scaler.transform(Xte)
